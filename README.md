@@ -1,24 +1,26 @@
-# README
+# Apartment App
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Setup
+- Added RSpec
+- Added Devise
 
-Things you may want to cover:
+Authorization vs Authentication
+- Authentication - providing the correct credentials (username and password)
+- Authorization - what you have access to with your credentials
 
-* Ruby version
 
-* System dependencies
+Devise Config
+Added the mailer
+config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 
-* Configuration
+config/initializers/devise.rb
 
-* Database creation
+# Find this line:
+config.sign_out_via = :delete
+# and replace it with this:
+config.sign_out_via = :get
 
-* Database initialization
 
-* How to run the test suite
+Apartments and Users
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+User has_many apartments and Apartment belongs_to User
