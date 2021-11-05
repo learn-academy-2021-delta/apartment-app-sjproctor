@@ -10,17 +10,15 @@ Authorization vs Authentication
 
 
 Devise Config
-Added the mailer
-config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
-
-config/initializers/devise.rb
-
+- Added the mailer
+- config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+- config/initializers/devise.rb
+```ruby
 # Find this line:
 config.sign_out_via = :delete
 # and replace it with this:
 config.sign_out_via = :get
-
+```
 
 Apartments and Users
-
-User has_many apartments and Apartment belongs_to User
+- User has_many apartments and Apartment belongs_to User

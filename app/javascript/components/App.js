@@ -1,4 +1,7 @@
 import React, { Component } from 'react'
+import Header from './components/Header'
+import Home from './pages/Home'
+
 import {
   BrowserRouter as  Router,
   Routes,
@@ -7,15 +10,13 @@ import {
 
 class App extends Component {
   render() {
-    console.log("logged in:", this.props.logged_in)
-    console.log("user:", this.props.current_user)
-    console.log("sign up:", this.props.new_user_route)
-    console.log("sign in:", this.props.sign_in_route)
-    console.log("sign out:", this.props.sign_out_route)
     return (
-      <>
-        <h1>Hello World</h1>
-      </>
+      <Router>
+        <Header {...this.props} />
+        <Routes>
+          <Route exact path="/" element={<Home />} />
+        </Routes>
+      </Router>
     )
   }
 }
