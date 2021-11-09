@@ -2,9 +2,10 @@ import React, { Component } from 'react'
 import Header from './components/Header'
 import Home from './pages/Home'
 import ApartmentIndex from './pages/ApartmentIndex'
+import ProtectedIndex from './pages/ProtectedIndex'
 
 import {
-  BrowserRouter as  Router,
+  BrowserRouter,
   Routes,
   Route
 } from 'react-router-dom'
@@ -27,8 +28,10 @@ class App extends Component {
   }
   render() {
     const { apartments } = this.state
+    console.log(apartments)
+    console.log(this.props.current_user)
     return (
-      <Router>
+      <BrowserRouter>
         <Header {...this.props} />
         <Routes>
           <Route exact path="/" element={<Home />} />
@@ -36,8 +39,13 @@ class App extends Component {
             path="/apartmentindex"
             element={<ApartmentIndex apartments={apartments} />}
           />
+          {this.props.logged_in &&
+            <Route
+              path="/myapartmentindex"
+              element={<ProtectedIndex apartments={apartments} />}
+            />}
         </Routes>
-      </Router>
+      </BrowserRouter>
     )
   }
 }

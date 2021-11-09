@@ -29,13 +29,13 @@ class Header extends Component {
             }
           </ul>
           <ul>
-            {logged_in &&
-              <NavLink to="/apartmentnew" className="nav-link">Add an Apartment</NavLink>
+            {!logged_in &&
+              <a href={new_user_route} className="nav-link">Sign Up</a>
             }
           </ul>
           <ul>
             {logged_in &&
-              <NavLink to="/myapartments" className="nav-link">My Apartments</NavLink>
+              <NavLink to="/myapartmentindex" className="nav-link">My Apartments</NavLink>
             }
           </ul>
         </div>
