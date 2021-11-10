@@ -10,8 +10,4 @@ describe("When Home renders", () => {
     const showHeading = shallow(<ApartmentShow />).find("h3")
     expect(showHeading.text()).toEqual("Apartment Features")
   })
-  it("displays a card", () => {
-    const showCard = shallow(<ApartmentShow />).find("h4")
-    expect(showCard.text()).toEqual("Location")
-  })
 })

@@ -3,10 +3,11 @@ import Header from './components/Header'
 import Home from './pages/Home'
 import ApartmentIndex from './pages/ApartmentIndex'
 import ProtectedIndex from './pages/ProtectedIndex'
+import ApartmentShow from './pages/ApartmentShow'
 
 import {
   BrowserRouter,
-  Routes,
+  Switch,
   Route
 } from 'react-router-dom'
 
@@ -33,18 +34,24 @@ class App extends Component {
     return (
       <BrowserRouter>
         <Header {...this.props} />
-        <Routes>
-          <Route exact path="/" element={<Home />} />
+        <Switch>
+          <Route exact path="/" component={Home} />
           <Route
             path="/apartmentindex"
-            element={<ApartmentIndex apartments={apartments} />}
+            render={() => <ApartmentIndex apartments={apartments} />}
           />
+          <Route path="/apartmentshow/:id" render={ (props) => {
+            let id = +props.match.params.id
+            let apartment = this.state.apartments.find(a => a.id === id)
+            return <ApartmentShow apartment={apartment} />
+          }}/>
           {this.props.logged_in &&
-            <Route
-              path="/myapartmentindex"
-              element={<ProtectedIndex apartments={apartments} />}
-            />}
-        </Routes>
+            <Route path="/myapartments" render={(props) => {
+              let apartments = this.state.apartments.filter(a => a.user_id === this.props.current_user.id)
+              return <ProtectedIndex apartments={apartments} />
+            }}/>
+          }
+        </Switch>
       </BrowserRouter>
     )
   }

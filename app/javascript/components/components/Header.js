@@ -35,7 +35,7 @@ class Header extends Component {
           </ul>
           <ul>
             {logged_in &&
-              <NavLink to="/myapartmentindex" className="nav-link">My Apartments</NavLink>
+              <NavLink to="/myapartments" className="nav-link">My Apartments</NavLink>
             }
           </ul>
         </div>

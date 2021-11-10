@@ -40,8 +40,8 @@ Added Font Awesome Icons
 - $ `yarn add @fortawesome/react-fontawesome`
 - import { faHome, faCity } from "@fortawesome/free-solid-svg-icons";
 - import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-- In JSX: <FontAwesomeIcon icon={faHome} />
-- In JSX: <FontAwesomeIcon icon={faCity} />
+- In JSX: `<FontAwesomeIcon icon={faHome} />`
+- In JSX: `<FontAwesomeIcon icon={faCity} />`
 
 
 Testing in a React in Rails App
