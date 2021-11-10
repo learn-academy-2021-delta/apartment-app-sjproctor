@@ -4,6 +4,7 @@ import Home from './pages/Home'
 import ApartmentIndex from './pages/ApartmentIndex'
 import ProtectedIndex from './pages/ProtectedIndex'
 import ApartmentShow from './pages/ApartmentShow'
+import ApartmentNew from './pages/ApartmentNew'
 
 import {
   BrowserRouter,
@@ -27,10 +28,41 @@ class App extends Component {
     .then(payload => this.setState({apartments: payload}))
     .catch(errors => console.log("index errors:", errors))
   }
+  createApartment = (newApartment) => {
+    fetch("/apartments", {
+      body: JSON.stringify(newApartment),
+      headers: {
+        "Content-Type": "application/json"
+      },
+      method: "POST"
+    })
+    .then(response => {
+      if(response.status === 422){
+        alert("There is something wrong with your submission.")
+      }
+      return response.json()
+    })
+    .then(() => this.readApartment())
+    .catch(errors => console.log("create errors:", errors))
+  }
+  deleteApartment = (id) => {
+    fetch(`apartments/${id}`, {
+      headers: {
+        "Content-Type": "application/json"
+      },
+      method: "DELETE"
+    })
+    .then(response => {
+      if(response.status === 422){
+        alert("Something went wrong with your delete action.")
+      }
+      return response.json()
+    })
+    .then(() => this.readApartment())
+    .catch(errors => console.log("delete errors:", errors))
+  }
   render() {
     const { apartments } = this.state
-    console.log(apartments)
-    console.log(this.props.current_user)
     return (
       <BrowserRouter>
         <Header {...this.props} />
@@ -48,7 +80,12 @@ class App extends Component {
           {this.props.logged_in &&
             <Route path="/myapartments" render={(props) => {
               let apartments = this.state.apartments.filter(a => a.user_id === this.props.current_user.id)
-              return <ProtectedIndex apartments={apartments} />
+              return <ProtectedIndex apartments={apartments} deleteApartment={this.deleteApartment} />
+            }}/>
+          }
+          {this.props.logged_in &&
+            <Route path="/apartmentnew" render={(props) => {
+              return <ApartmentNew createApartment={this.createApartment} current_user={this.props.current_user} />
             }}/>
           }
         </Switch>

@@ -45,6 +45,11 @@ class ProtectedIndex extends Component {
                 <h5>
                   <FontAwesomeIcon icon={faPaw} className="fa-icon" />Pets Allowed: {apartment.pets}
                 </h5>
+                <Button
+                  onClick={() => this.props.deleteApartment(apartment.id)}
+                >
+                  Delete Listing
+                </Button>
               </section>
             )
           })}
