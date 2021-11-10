@@ -38,6 +38,11 @@ class Header extends Component {
               <NavLink to="/myapartments" className="nav-link">My Apartments</NavLink>
             }
           </ul>
+          <ul>
+            {logged_in &&
+              <NavLink to="/apartmentnew" className="nav-link">Add an Apartment</NavLink>
+            }
+          </ul>
         </div>
       </header>
     )
